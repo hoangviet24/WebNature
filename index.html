@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="vi" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Beyond The Vale - Giai Điệu Vĩnh Cửu</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        serif: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    colors: {
+                        vale: {
+                            gold: '#e6c875',
+                            emerald: '#2d5a42',
+                            purple: '#8a508f',
+                            dark: '#0c1310',
+                            mist: 'rgba(255, 255, 255, 0.08)'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body id="mainBody" class="bg-vale-image min-h-screen relative text-slate-100 selection:bg-amber-500/30 selection:text-amber-200">
+
+    <canvas id="ambientCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-60"></canvas>
+
+    <header class="sticky top-0 z-50 glass-panel border-b border-amber-500/10 px-4 lg:px-8 py-4 transition-all duration-300">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-full border border-amber-400/30 flex items-center justify-center bg-emerald-950/40 group-hover:border-amber-400/80 transition-colors">
+                    <i data-lucide="mountain" class="w-5 h-5 text-amber-300"></i>
+                </div>
+                <div>
+                    <span class="font-serif text-xl tracking-widest text-amber-100 font-bold block uppercase leading-none">THE VALE</span>
+                    <span class="text-[10px] text-amber-300/70 tracking-widest block uppercase font-light">Strings of Eternity</span>
+                </div>
+            </a>
+
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex space-x-8 text-sm font-medium tracking-wider uppercase text-slate-300">
+                <a href="#about" class="hover:text-amber-300 transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-amber-300 hover:after:w-full after:transition-all">Hành Trình</a>
+                <a href="#soundscape" class="hover:text-amber-300 transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-amber-300 hover:after:w-full after:transition-all">Âm Thanh</a>
+                <a href="#gallery" class="hover:text-amber-300 transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-amber-300 hover:after:w-full after:transition-all">Cảnh Sắc</a>
+                <a href="#wisdom" class="hover:text-amber-300 transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-amber-300 hover:after:w-full after:transition-all">Suy Ngẫm</a>
+                <a href="#journal" class="hover:text-amber-300 transition-colors py-1 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-amber-300 hover:after:w-full after:transition-all">Ký Sự</a>
+            </nav>
+
+            <!-- Quick Ambient Audio Toggle -->
+            <button id="quickPlayBtn" class="flex items-center space-x-2 bg-amber-400/10 hover:bg-amber-400/20 border border-amber-400/30 text-amber-200 px-4 py-2 rounded-full text-xs font-semibold tracking-wider transition-all shadow-lg hover:shadow-amber-500/10">
+                <i data-lucide="music" id="quickIcon" class="w-4 h-4 animate-pulse"></i>
+                <span id="quickPlayText">PHÁT NHẠC THIÊN NHIÊN</span>
+            </button>
+        </div>
+    </header>
+
+    <section class="relative min-h-[90vh] flex items-center justify-center text-center px-4 py-20 z-10">
+        <div class="max-w-4xl mx-auto space-y-8">
+            <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full border border-amber-300/20 bg-amber-950/30 text-amber-200/90 text-xs tracking-widest uppercase">
+                <i data-lucide="sparkles" class="w-3.5 h-3.5 text-amber-300"></i>
+                <span>Trở Về Nơi Bình Yên Trong Tâm Hồn</span>
+            </div>
+
+            <h1 class="font-serif text-5xl sm:text-7xl md:text-8xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-amber-100 via-amber-200 to-amber-400 gold-glow leading-tight">
+                HOME BEYOND THE VALE
+            </h1>
+
+            <p class="font-serif text-xl sm:text-2xl md:text-3xl italic text-emerald-200/90 tracking-wide font-light">
+                "Strings of Eternity — Những Giai Điệu Của Vĩnh Cửu"
+            </p>
+
+            <p class="max-w-2xl mx-auto text-slate-300 text-sm sm:text-base font-light leading-relaxed">
+                Lắng nghe tiếng gọi từ những rặng núi mênh mông, nơi những dải nắng sớm xuyên qua sương mờ chiếu xuống làng quê êm đềm. Hãy thư giãn, thả mình vào không gian âm thanh huyền ảo của thiên nhiên nguyên sơ.
+            </p>
+
+            <div class="pt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#soundscape" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-semibold tracking-wide text-sm transition-all shadow-lg shadow-amber-500/20 flex items-center justify-center space-x-2">
+                    <i data-lucide="headphones" class="w-4 h-4"></i>
+                    <span>Trải Nghiệm Âm Thanh</span>
+                </a>
+                <a href="#about" class="w-full sm:w-auto px-8 py-3.5 rounded-full glass-card hover:bg-white/10 text-amber-100 font-medium tracking-wide text-sm transition-all flex items-center justify-center space-x-2">
+                    <span>Khám Phá Câu Chuyện</span>
+                    <i data-lucide="arrow-down" class="w-4 h-4 text-amber-300"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="max-w-7xl mx-auto px-4 lg:px-8 space-y-32 py-12 relative z-10">
+
+        <section id="about" class="scroll-mt-28">
+            <div class="glass-panel rounded-3xl p-8 lg:p-12 relative overflow-hidden">
+                <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-7 space-y-6">
+                        <div class="space-y-2">
+                            <span class="text-amber-400 text-xs font-semibold tracking-widest uppercase">Hành Trình & Huyền Thoại</span>
+                            <h2 class="font-serif text-3xl sm:text-4xl font-bold text-amber-100">Bản Cầm Ca Giữa Lòng Thung Lũng</h2>
+                        </div>
+                        
+                        <p class="text-slate-300 leading-relaxed text-sm sm:text-base font-light">
+                            Nơi phía xa sau những rặng núi trập trùng là một ngôi làng thanh bình nằm trọn trong lòng thung lũng. Người lữ khách dừng chân trên đồi hoa oải hương muôn sắc, nhìn ngắm những vạt nắng thần tiên rọi chiếu qua từng làn mây.
+                        </p>
+                        
+                        <p class="text-slate-300 leading-relaxed text-sm sm:text-base font-light">
+                            Từng cơn gió thoảng qua mang theo giai điệu vĩnh cửu của đất trời—tiếng đàn hạc âm vang từ thung lũng cổ xưa hòa cùng tiếng suối ngàn và ngọn gió ngàn năm.
+                        </p>
+
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-4 pt-4">
+                            <div class="p-4 rounded-2xl bg-white/5 border border-white/10 text-center">
+                                <span class="font-serif text-2xl font-bold text-amber-300 block">1,240m</span>
+                                <span class="text-xs text-slate-400">Độ cao điểm nhìn</span>
+                            </div>
+                            <div class="p-4 rounded-2xl bg-white/5 border border-white/10 text-center">
+                                <span class="font-serif text-2xl font-bold text-emerald-300 block">Thuần Khiết</span>
+                                <span class="text-xs text-slate-400">Không khí thiên nhiên</span>
+                            </div>
+                            <div class="p-4 rounded-2xl bg-white/5 border border-white/10 text-center col-span-2 sm:col-span-1">
+                                <span class="font-serif text-2xl font-bold text-purple-300 block">Vĩnh Cửu</span>
+                                <span class="text-xs text-slate-400">Giai điệu thời gian</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 relative">
+                        <div class="relative mx-auto rounded-2xl overflow-hidden border border-amber-300/30 shadow-2xl group">
+                            <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=800&q=80" alt="Valley View" class="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-700 cursor-pointer" onclick="openGalleryModal('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=1600&q=80', 'Rặng Núi Thung Lũng', 'Đỉnh núi hung vĩ trong ánh nắng bình minh.')">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80 pointer-events-none"></div>
+                            <div class="absolute bottom-4 left-4 right-4 p-4 rounded-xl glass-card pointer-events-none">
+                                <p class="text-xs text-amber-200 italic font-serif">"Thiên nhiên không vội vã, nhưng mọi thứ đều hoàn thành."</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="soundscape" class="scroll-mt-28">
+            <div class="text-center space-y-3 mb-12">
+                <span class="text-amber-400 text-xs font-semibold tracking-widest uppercase">Trải Nghiệm Thư Giãn</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-amber-100">Bàn Trộn Âm Thanh Cổ Tích</h2>
+                <p class="text-slate-400 text-sm max-w-xl mx-auto">Tự hòa phối không gian âm thanh cho riêng bạn bằng thuật toán mô phỏng Web Audio ngẫu nhiên.</p>
+            </div>
+
+            <div class="glass-panel rounded-3xl p-6 sm:p-10 border border-amber-500/20">
+                <!-- Master Controller -->
+                <div class="flex flex-col sm:flex-row items-center justify-between gap-6 pb-8 border-b border-white/10">
+                    <div class="flex items-center space-x-4">
+                        <button id="masterPlayBtn" class="w-16 h-16 rounded-full bg-gradient-to-r from-amber-400 to-amber-600 text-slate-950 flex items-center justify-center shadow-lg shadow-amber-500/30 hover:scale-105 transition-transform">
+                            <i data-lucide="play" class="w-8 h-8 fill-current ml-1" id="masterIcon"></i>
+                        </button>
+                        <div>
+                            <h3 class="font-serif text-xl font-bold text-amber-100" id="soundStatusTitle">Âm Thanh Đang Tắt</h3>
+                            <p class="text-xs text-slate-400" id="soundStatusSub">Nhấn nút để bật trải nghiệm âm hưởng thiên nhiên</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-3 bg-black/30 px-4 py-2 rounded-full border border-white/10">
+                        <i data-lucide="volume-2" class="w-4 h-4 text-amber-300"></i>
+                        <span class="text-xs font-medium text-slate-300">Âm lượng tổng</span>
+                        <input type="range" id="masterVolume" min="0" max="1" step="0.01" value="0.7" class="w-24 sm:w-32 cursor-pointer">
+                    </div>
+                </div>
+
+                <!-- Individual Audio Track Sliders -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pt-8">
+                    
+                    <!-- Breeze / Wind -->
+                    <div class="glass-card p-5 rounded-2xl space-y-4">
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center space-x-3">
+                                <div class="p-2.5 rounded-xl bg-teal-500/20 text-teal-300">
+                                    <i data-lucide="wind" class="w-5 h-5"></i>
+                                </div>
+                                <span class="font-medium text-sm text-slate-200">Tiếng Gió Ngàn</span>
+                            </div>
+                            <span class="text-xs text-amber-300 font-mono" id="windVal">50%</span>
+                        </div>
+                        <input type="range" id="windSlider" min="0" max="1" step="0.01" value="0.5" class="w-full">
+                    </div>
+
+                    <!-- Ambient Harp / Strings Synth -->
+                    <div class="glass-card p-5 rounded-2xl space-y-4">
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center space-x-3">
+                                <div class="p-2.5 rounded-xl bg-amber-500/20 text-amber-300">
+                                    <i data-lucide="music-2" class="w-5 h-5"></i>
+                                </div>
+                                <span class="font-medium text-sm text-slate-200">Đàn Hạc Cổ Xưa</span>
+                            </div>
+                            <span class="text-xs text-amber-300 font-mono" id="harpVal">40%</span>
+                        </div>
+                        <input type="range" id="harpSlider" min="0" max="1" step="0.01" value="0.4" class="w-full">
+                    </div>
+
+                    <!-- Water Stream -->
+                    <div class="glass-card p-5 rounded-2xl space-y-4">
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center space-x-3">
+                                <div class="p-2.5 rounded-xl bg-blue-500/20 text-blue-300">
+                                    <i data-lucide="droplets" class="w-5 h-5"></i>
+                                </div>
+                                <span class="font-medium text-sm text-slate-200">Tiếng Suối Chảy</span>
+                            </div>
+                            <span class="text-xs text-amber-300 font-mono" id="streamVal">30%</span>
+                        </div>
+                        <input type="range" id="streamSlider" min="0" max="1" step="0.01" value="0.3" class="w-full">
+                    </div>
+
+                    <!-- Birds / Wildlife -->
+                    <div class="glass-card p-5 rounded-2xl space-y-4">
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center space-x-3">
+                                <div class="p-2.5 rounded-xl bg-emerald-500/20 text-emerald-300">
+                                    <i data-lucide="bird" class="w-5 h-5"></i>
+                                </div>
+                                <span class="font-medium text-sm text-slate-200">Tiếng Chim Hót</span>
+                            </div>
+                            <span class="text-xs text-amber-300 font-mono" id="birdsVal">25%</span>
+                        </div>
+                        <input type="range" id="birdsSlider" min="0" max="1" step="0.01" value="0.25" class="w-full">
+                    </div>
+
+                </div>
+
+                <!-- Presets -->
+                <div class="mt-8 pt-6 border-t border-white/10 flex flex-wrap items-center justify-between gap-4">
+                    <span class="text-xs text-slate-400 font-medium uppercase tracking-wider">Chế độ phối sẵn:</span>
+                    <div class="flex flex-wrap gap-2">
+                        <button onclick="setSoundPreset('dawn')" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-300 transition-colors">Bình Minh Rạng Rỡ</button>
+                        <button onclick="setSoundPreset('twilight')" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-300 transition-colors">Hoàng Hôn Thung Lũng</button>
+                        <button onclick="setSoundPreset('meditation')" class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs text-slate-300 transition-colors">Thiền Định Vĩnh Cửu</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="scroll-mt-28">
+            <div class="text-center space-y-3 mb-12">
+                <span class="text-amber-400 text-xs font-semibold tracking-widest uppercase">Thư Viện Ảnh</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-amber-100">Góc Nhìn Thung Lũng</h2>
+                <p class="text-slate-400 text-sm max-w-xl mx-auto">Bấm vào bất kỳ hình ảnh nào để phóng to, thu nhỏ hoặc đặt làm hình nền cho trang web.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Gallery Item 1 -->
+                <div onclick="openGalleryModal('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1600&q=80', 'Nắng Sớm Qua Rặng Núi', 'Những luồng sáng lung linh xuyên qua lớp mây dày rọi xuống thung lũng xanh.')" 
+                     class="glass-card rounded-2xl overflow-hidden cursor-pointer group">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Gallery 1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-slate-950/40 group-hover:bg-slate-950/10 transition-colors"></div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <span class="text-xs text-amber-300 uppercase tracking-wider block">Cảnh Quan</span>
+                            <h3 class="font-serif text-lg font-semibold text-white">Nắng Sớm Qua Rặng Núi</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 2 -->
+                <div onclick="openGalleryModal('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80', 'Cánh Đồng Hoa Tím', 'Sắc tím oải hương phủ kín ngọn đồi rực rỡ dưới ánh trời chiều.')" 
+                     class="glass-card rounded-2xl overflow-hidden cursor-pointer group">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80" alt="Gallery 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-slate-950/40 group-hover:bg-slate-950/10 transition-colors"></div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <span class="text-xs text-purple-300 uppercase tracking-wider block">Thảm Thực Vật</span>
+                            <h3 class="font-serif text-lg font-semibold text-white">Cánh Đồng Hoa Tím</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 3 -->
+                <div onclick="openGalleryModal('https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1600&q=80', 'Bầu Trời Đêm Huyền Diệu', 'Dải ngân hà lấp lánh phản chiếu sự bình yên vô tận của vùng đất.')" 
+                     class="glass-card rounded-2xl overflow-hidden cursor-pointer group">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80" alt="Gallery 3" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-slate-950/40 group-hover:bg-slate-950/10 transition-colors"></div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <span class="text-xs text-blue-300 uppercase tracking-wider block">Đêm Kỳ Diệu</span>
+                            <h3 class="font-serif text-lg font-semibold text-white">Bầu Trời Đêm Huyền Diệu</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 4 -->
+                <div onclick="openGalleryModal('https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1600&q=80', 'Rừng Sương Mờ', 'Lớp sương mỏng ôm trọn những tán cây xanh giữa núi rừng ngút ngàn.')" 
+                     class="glass-card rounded-2xl overflow-hidden cursor-pointer group">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80" alt="Gallery 4" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-slate-950/40 group-hover:bg-slate-950/10 transition-colors"></div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <span class="text-xs text-emerald-300 uppercase tracking-wider block">Sương Ngàn</span>
+                            <h3 class="font-serif text-lg font-semibold text-white">Rừng Sương Mờ</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 5 -->
+                <div onclick="openGalleryModal('https://images.unsplash.com/photo-1439853949127-fa647821eba0?auto=format&fit=crop&w=1600&q=80', 'Dòng Suối Thuần Khiết', 'Nước suối trong veo len lỏi qua từng khe đá mát lạnh.')" 
+                     class="glass-card rounded-2xl overflow-hidden cursor-pointer group">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1439853949127-fa647821eba0?auto=format&fit=crop&w=800&q=80" alt="Gallery 5" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-slate-950/40 group-hover:bg-slate-950/10 transition-colors"></div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <span class="text-xs text-teal-300 uppercase tracking-wider block">Suối Ngàn</span>
+                            <h3 class="font-serif text-lg font-semibold text-white">Dòng Suối Thuần Khiết</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 6 -->
+                <div onclick="openGalleryModal('https://images.unsplash.com/photo-1650464179774-caf42373dc17?auto=format&fit=crop&w=1600&q=80', 'Lối Nhỏ Trong Rừng', 'Con đường mòn tĩnh lặng đưa bước lữ khách đi sâu vào lòng thiên nhiên.')" 
+                     class="glass-card rounded-2xl overflow-hidden cursor-pointer group">
+                    <div class="relative h-64 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1650464179774-caf42373dc17?auto=format&fit=crop&w=800&q=80" alt="Gallery 6" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-slate-950/40 group-hover:bg-slate-950/10 transition-colors"></div>
+                        <div class="absolute bottom-4 left-4 right-4">
+                            <span class="text-xs text-amber-200 uppercase tracking-wider block">Hành Trình</span>
+                            <h3 class="font-serif text-lg font-semibold text-white">Lối Nhỏ Trong Rừng</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="wisdom" class="scroll-mt-28">
+            <div class="glass-panel rounded-3xl p-8 lg:p-12 text-center max-w-4xl mx-auto border border-amber-400/20 relative">
+                <i data-lucide="quote" class="w-12 h-12 text-amber-400/20 mx-auto mb-4"></i>
+                <span class="text-xs text-amber-300 uppercase tracking-widest block font-semibold mb-2">Lời Thì Thầm Của Gió</span>
+                
+                <div class="min-h-[140px] flex items-center justify-center py-4">
+                    <p id="quoteText" class="font-serif text-2xl sm:text-3xl italic text-amber-100 font-light leading-relaxed transition-opacity duration-500">
+                        "Giữa chốn an yên, tâm hồn bạn chính là giai điệu thuần khiết nhất của đại ngàn."
+                    </p>
+                </div>
+
+                <div class="pt-6 border-t border-white/10 flex justify-center">
+                    <button onclick="generateNewQuote()" class="px-6 py-2.5 rounded-full bg-amber-400/10 hover:bg-amber-400/20 border border-amber-400/40 text-amber-200 text-xs font-semibold tracking-widest uppercase transition-all flex items-center space-x-2">
+                        <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+                        <span>Đọc Lời Thì Thầm Mới</span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="journal" class="scroll-mt-28">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <div class="lg:col-span-5 space-y-4">
+                    <span class="text-amber-400 text-xs font-semibold tracking-widest uppercase">Ghi Dấu Kỷ Niệm</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-amber-100">Sổ Ký Sự Lữ Khách</h2>
+                    <p class="text-slate-300 text-sm leading-relaxed font-light">
+                        Hãy để lại suy nghĩ, cảm xúc hoặc một lời nguyện ước khi dừng chân tại thung lũng vĩnh cửu. Dòng ký sự của bạn sẽ được lưu giữ trên trình duyệt này.
+                    </p>
+
+                    <form id="journalForm" class="space-y-4 pt-4">
+                        <div>
+                            <label class="block text-xs font-medium text-amber-200 mb-1">Tên / Biệt Danh</label>
+                            <input type="text" id="authorName" required placeholder="Ví dụ: Người Lữ Khách Phương Xa" 
+                                   class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-slate-100 text-sm focus:outline-none focus:border-amber-400 transition-colors">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-medium text-amber-200 mb-1">Cảm Nhận / Lời Nguyện Ước</label>
+                            <textarea id="journalContent" rows="4" required placeholder="Ghi lại cảm xúc của bạn về thung lũng..." 
+                                      class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-slate-100 text-sm focus:outline-none focus:border-amber-400 transition-colors resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-3.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600 text-white font-semibold text-sm tracking-wide transition-all shadow-lg shadow-emerald-950/50 flex items-center justify-center space-x-2">
+                            <i data-lucide="feather" class="w-4 h-4"></i>
+                            <span>Lưu Vào Sổ Ký Sự</span>
+                        </button>
+                    </form>
+                </div>
+
+                <div class="lg:col-span-7">
+                    <div class="glass-panel rounded-3xl p-6 sm:p-8 min-h-[400px] flex flex-col justify-between">
+                        <div class="flex justify-between items-center mb-6 pb-4 border-b border-white/10">
+                            <h3 class="font-serif text-xl font-bold text-amber-100">Dòng Ký Sự Đã Lưu</h3>
+                            <span id="journalCount" class="text-xs bg-amber-400/20 text-amber-300 px-3 py-1 rounded-full border border-amber-400/30">0 ký sự</span>
+                        </div>
+
+                        <div id="journalList" class="space-y-4 max-h-[360px] overflow-y-auto pr-2">
+                            <!-- Dynamic journal items will render here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Gallery Image Modal (With Zoom and Change Background Features) -->
+    <div id="galleryModal" class="fixed inset-0 z-50 bg-slate-950/85 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="glass-panel max-w-4xl w-full rounded-3xl overflow-hidden relative border border-amber-300/30 flex flex-col max-h-[90vh]">
+            <div class="flex items-center justify-between p-4 border-b border-white/10">
+                <h3 id="modalTitle" class="font-serif text-xl font-bold text-amber-200"></h3>
+                <div class="flex items-center space-x-2">
+                    <button onclick="zoomImage(0.2)" class="p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs flex items-center space-x-1" title="Phóng to">
+                        <i data-lucide="zoom-in" class="w-4 h-4"></i>
+                    </button>
+                    <button onclick="zoomImage(-0.2)" class="p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs flex items-center space-x-1" title="Thu nhỏ">
+                        <i data-lucide="zoom-out" class="w-4 h-4"></i>
+                    </button>
+                    <button onclick="resetZoomImage()" class="p-2 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs flex items-center space-x-1" title="Đặt lại zoom">
+                        <i data-lucide="rotate-ccw" class="w-4 h-4"></i>
+                    </button>
+                    <button onclick="closeGalleryModal()" class="p-2 rounded-lg bg-red-500/30 hover:bg-red-500/50 text-white text-xs">
+                        <i data-lucide="x" class="w-5 h-5"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="relative flex-1 overflow-hidden img-zoom-container bg-black/40 flex items-center justify-center min-h-[300px]">
+                <img id="modalImg" src="" alt="Modal View" class="max-h-[60vh] object-contain transition-transform duration-200 ease-out select-none">
+            </div>
+
+            <div class="p-6 space-y-4 border-t border-white/10 bg-slate-950/40">
+                <p id="modalDesc" class="text-slate-300 text-sm font-light"></p>
+                <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-white/5">
+                    <span class="text-xs text-slate-400">Gợi ý: Bạn có thể dùng cuộn chuột để phóng to / thu nhỏ ảnh.</span>
+                    <button onclick="applyBackgroundFromModal()" class="px-4 py-2 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-semibold text-xs transition-colors flex items-center space-x-2">
+                        <i data-lucide="image" class="w-4 h-4"></i>
+                        <span>Đặt Làm Background Trang Web</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Journal Reader Modal (For Reading Long Entries) -->
+    <div id="journalModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="glass-panel max-w-2xl w-full rounded-3xl p-6 sm:p-8 relative border border-amber-300/30 space-y-6">
+            <div class="flex justify-between items-center border-b border-white/10 pb-4">
+                <div>
+                    <span class="text-xs text-amber-400 font-mono" id="readJournalDate"></span>
+                    <h3 id="readJournalAuthor" class="font-serif text-2xl font-bold text-amber-100"></h3>
+                </div>
+                <button onclick="closeJournalModal()" class="w-8 h-8 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white/20">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+            </div>
+            <div class="max-h-[60vh] overflow-y-auto pr-2">
+                <p id="readJournalContent" class="text-slate-200 text-base font-light leading-relaxed whitespace-pre-wrap"></p>
+            </div>
+            <div class="pt-4 border-t border-white/10 flex justify-end">
+                <button onclick="closeJournalModal()" class="px-5 py-2 rounded-xl bg-amber-400/20 hover:bg-amber-400/30 text-amber-200 text-xs font-semibold">Đóng Sổ Ký Sự</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="glass-panel border-t border-white/10 mt-20 py-8 px-4 text-center text-xs text-slate-400 relative z-10">
+        <div class="max-w-7xl mx-auto space-y-3">
+            <p class="font-serif text-base text-amber-200">HOME BEYOND THE VALE — STRINGS OF ETERNITY</p>
+            <p>© 2026 Một Không Gian Trải Nghiệm Thư Giãn Tuyệt Đẹp Về Thiên Nhiên.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        lucide.createIcons();
+    </script>
+    <script src="js/canvas.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/quotes.js"></script>
+    <script src="js/gallery.js"></script>
+    <script src="js/journal.js"></script>
+</body>
+</html>

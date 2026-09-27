@@ -1,0 +1,70 @@
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #0c1310;
+    color: #f1f5f9;
+    overflow-x: hidden;
+}
+
+.bg-vale-image {
+    background-image: linear-gradient(to bottom, rgba(12, 19, 16, 0.35), rgba(12, 19, 16, 0.85)), 
+                      url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=2000&q=85');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    transition: background-image 0.8s ease-in-out;
+}
+
+.glass-panel {
+    background: rgba(18, 28, 23, 0.55);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(230, 200, 117, 0.18);
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.glass-card {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(230, 200, 117, 0.4);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px -5px rgba(0, 0, 0, 0.5), 0 0 15px rgba(230, 200, 117, 0.15);
+}
+
+.gold-glow {
+    text-shadow: 0 0 12px rgba(230, 200, 117, 0.4);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #0c1310;
+}
+::-webkit-scrollbar-thumb {
+    background: #2d5a42;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #e6c875;
+}
+
+/* Range input styling */
+input[type=range] {
+    accent-color: #e6c875;
+}
+
+.img-zoom-container {
+    overflow: hidden;
+    cursor: grab;
+}
+.img-zoom-container:active {
+    cursor: grabbing;
+}
